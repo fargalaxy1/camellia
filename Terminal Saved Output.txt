@@ -1,0 +1,1650 @@
+Last login: Mon May 18 10:29:54 on ttys001
+Martinas-MacBook-Pro:camellia marta$ cd ..
+Martinas-MacBook-Pro:virtualFold marta$ ls
+backup			djangoExample_one	tools
+bin			include
+camellia		lib
+Martinas-MacBook-Pro:virtualFold marta$ . bin/activate
+(virtualFold)Martinas-MacBook-Pro:virtualFold marta$ cd camellia/
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	manage.py	static
+db.sqlite3	media		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py shell
+Python 2.7.8 (default, Jul  2 2014, 10:14:46) 
+[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import south
+>>> 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py syncdb
+Syncing...
+Creating tables ...
+Creating table south_migrationhistory
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > website
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python manage.py makemigrations
+Unknown command: 'makemigrations'
+Type 'manage.py help' for usage.
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration southtut --initial
+There is no enabled application matching 'southtut'.
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate
+Running migrations for taggit:
+ - Migrating forwards to 0002_unique_tagnames.
+ > taggit:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "slug" varchar(100) NOT NULL UNIQUE)
+The error was: table "taggit_tag" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "taggit_tag"; []
+   = DROP TABLE "taggit_taggeditem"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: taggit:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/taggit/south_migrations/0001_initial.py", line 15, in forwards
+    ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "taggit_tag" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ syncdb --migrate
+-bash: syncdb: command not found
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python manage.py  syncdb --migrate
+Syncing...
+Creating tables ...
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+Migrating...
+Running migrations for taggit:
+ - Migrating forwards to 0002_unique_tagnames.
+ > taggit:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "slug" varchar(100) NOT NULL UNIQUE)
+The error was: table "taggit_tag" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "taggit_tag"; []
+   = DROP TABLE "taggit_taggeditem"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: taggit:0001_initial
+Traceback (most recent call last):
+  File "manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 415, in handle
+    return self.handle_noargs(**options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/syncdb.py", line 103, in handle_noargs
+    management.call_command('migrate', **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 159, in call_command
+    return klass.execute(*args, **defaults)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/taggit/south_migrations/0001_initial.py", line 15, in forwards
+    ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "taggit_tag" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py startapp southtut
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py
+Usage: manage.py subcommand [options] [args]
+
+Options:
+  -v VERBOSITY, --verbosity=VERBOSITY
+                        Verbosity level; 0=minimal output, 1=normal output,
+                        2=verbose output, 3=very verbose output
+  --settings=SETTINGS   The Python path to a settings module, e.g.
+                        "myproject.settings.main". If this isn't provided, the
+                        DJANGO_SETTINGS_MODULE environment variable will be
+                        used.
+  --pythonpath=PYTHONPATH
+                        A directory to add to the Python path, e.g.
+                        "/home/djangoprojects/myproject".
+  --traceback           Raise on exception
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[auth]
+    changepassword
+    createsuperuser
+
+[django]
+    check
+    cleanup
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    runfcgi
+    shell
+    sql
+    sqlall
+    sqlclear
+    sqlcustom
+    sqldropindexes
+    sqlflush
+    sqlindexes
+    sqlinitialdata
+    sqlsequencereset
+    startapp
+    startproject
+    validate
+
+[easy_thumbnails]
+    thumbnail_cleanup
+
+[sessions]
+    clearsessions
+
+[south]
+    convert_to_south
+    datamigration
+    graphmigrations
+    migrate
+    migrationcheck
+    schemamigration
+    startmigration
+    syncdb
+    test
+    testserver
+
+[staticfiles]
+    collectstatic
+    findstatic
+    runserver
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		southtut	static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration UnnostroTe --initial
+There is no enabled application matching 'UnnostroTe'.
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --initial
+Creating migrations directory at '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+Creating __init__.py in '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+ + Added model website.CategorieTe
+ + Added model website.UnnostroTe
+ + Added model website.AccessoriTe
+ + Added model website.ImmaginiLocale
+ + Added model website.ImmaginiChiSiamo
+ + Added model website.Slider
+Created 0001_initial.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --auto
+ - Deleted field prezzo_hg on website.UnnostroTe
+Created 0002_auto__del_field_unnostrote_prezzo_hg.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0002_auto__del_field_unnostrote_prezzo_hg.
+ > website:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "website_categoriete" ("id" integer NOT NULL PRIMARY KEY, "titolo" varchar(100) NOT NULL)
+The error was: table "website_categoriete" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "website_categoriete"; []
+   = DROP TABLE "website_unnostrote"; []
+   = DROP TABLE "website_accessorite"; []
+   = DROP TABLE "website_immaginilocale"; []
+   = DROP TABLE "website_immaginichisiamo"; []
+   = DROP TABLE "website_slider"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: website:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/camellia/website/migrations/0001_initial.py", line 14, in forwards
+    ('titolo', self.gf('django.db.models.fields.CharField')(max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "website_categoriete" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python manage.py syncdb
+Syncing...
+Creating tables ...
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+ - website
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python manage.py migrate 0001 --all
+ - Soft matched migration 0001 to 0001_initial.
+Running migrations for taggit:
+ - Migrating forwards to 0001_initial.
+ > taggit:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "slug" varchar(100) NOT NULL UNIQUE)
+The error was: table "taggit_tag" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "taggit_tag"; []
+   = DROP TABLE "taggit_taggeditem"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: taggit:0001_initial
+Traceback (most recent call last):
+  File "manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/taggit/south_migrations/0001_initial.py", line 15, in forwards
+    ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "taggit_tag" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate
+Running migrations for taggit:
+ - Migrating forwards to 0002_unique_tagnames.
+ > taggit:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "slug" varchar(100) NOT NULL UNIQUE)
+The error was: table "taggit_tag" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "taggit_tag"; []
+   = DROP TABLE "taggit_taggeditem"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: taggit:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/taggit/south_migrations/0001_initial.py", line 15, in forwards
+    ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "taggit_tag" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python manage.py migrate core --fake
+Traceback (most recent call last):
+  File "manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 81, in handle
+    apps = [Migrations(app)]
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/base.py", line 64, in __call__
+    self.instances[app_label] = super(MigrationsMetaclass, self).__call__(app_label_to_app_module(app_label), **kwds)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/utils.py", line 41, in app_label_to_app_module
+    app = models.get_app(app_label)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/loading.py", line 190, in get_app
+    raise ImproperlyConfigured("App with label %s could not be found" % app_label)
+django.core.exceptions.ImproperlyConfigured: App with label core could not be found
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0002_auto__del_field_unnostrote_prezzo_hg.
+ > website:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "website_categoriete" ("id" integer NOT NULL PRIMARY KEY, "titolo" varchar(100) NOT NULL)
+The error was: table "website_categoriete" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "website_categoriete"; []
+   = DROP TABLE "website_unnostrote"; []
+   = DROP TABLE "website_accessorite"; []
+   = DROP TABLE "website_immaginilocale"; []
+   = DROP TABLE "website_immaginichisiamo"; []
+   = DROP TABLE "website_slider"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: website:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/camellia/website/migrations/0001_initial.py", line 14, in forwards
+    ('titolo', self.gf('django.db.models.fields.CharField')(max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "website_categoriete" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0001_initial.
+ > website:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "website_categoriete" ("id" integer NOT NULL PRIMARY KEY, "titolo" varchar(100) NOT NULL)
+The error was: table "website_categoriete" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "website_categoriete"; []
+   = DROP TABLE "website_unnostrote"; []
+   = DROP TABLE "website_accessorite"; []
+   = DROP TABLE "website_immaginilocale"; []
+   = DROP TABLE "website_immaginichisiamo"; []
+   = DROP TABLE "website_slider"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: website:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/camellia/website/migrations/0001_initial.py", line 14, in forwards
+    ('titolo', self.gf('django.db.models.fields.CharField')(max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "website_categoriete" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python manage.py syncdb
+Syncing...
+Creating tables ...
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+ - website
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate taggit
+Running migrations for taggit:
+ - Migrating forwards to 0002_unique_tagnames.
+ > taggit:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "slug" varchar(100) NOT NULL UNIQUE)
+The error was: table "taggit_tag" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "taggit_tag"; []
+   = DROP TABLE "taggit_taggeditem"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: taggit:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/taggit/south_migrations/0001_initial.py", line 15, in forwards
+    ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "taggit_tag" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate
+Running migrations for taggit:
+ - Migrating forwards to 0002_unique_tagnames.
+ > taggit:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "slug" varchar(100) NOT NULL UNIQUE)
+The error was: table "taggit_tag" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "taggit_tag"; []
+   = DROP TABLE "taggit_taggeditem"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: taggit:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/taggit/south_migrations/0001_initial.py", line 15, in forwards
+    ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "taggit_tag" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --initial
+Creating migrations directory at '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+Creating __init__.py in '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+ + Added model website.CategorieTe
+ + Added model website.UnnostroTe
+ + Added model website.AccessoriTe
+ + Added model website.ImmaginiLocale
+ + Added model website.ImmaginiChiSiamo
+ + Added model website.Slider
+Created 0001_initial.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0001_initial.
+ > website:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "website_categoriete" ("id" integer NOT NULL PRIMARY KEY, "titolo" varchar(100) NOT NULL)
+The error was: table "website_categoriete" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "website_categoriete"; []
+   = DROP TABLE "website_unnostrote"; []
+   = DROP TABLE "website_accessorite"; []
+   = DROP TABLE "website_immaginilocale"; []
+   = DROP TABLE "website_immaginichisiamo"; []
+   = DROP TABLE "website_slider"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: website:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/camellia/website/migrations/0001_initial.py", line 14, in forwards
+    ('titolo', self.gf('django.db.models.fields.CharField')(max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "website_categoriete" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ rm db.sqlite3 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --initial
+ + Added model website.CategorieTe
+ + Added model website.UnnostroTe
+ + Added model website.AccessoriTe
+ + Added model website.ImmaginiLocale
+ + Added model website.ImmaginiChiSiamo
+ + Added model website.Slider
+Created 0002_initial.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 200, in migrate_app
+    applied_all = check_migration_histories(applied_all, delete_ghosts, ignore_ghosts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 79, in check_migration_histories
+    for h in histories:
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 96, in __iter__
+    self._fetch_all()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 857, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 713, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 786, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: south_migrationhistory
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 200, in migrate_app
+    applied_all = check_migration_histories(applied_all, delete_ghosts, ignore_ghosts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 79, in check_migration_histories
+    for h in histories:
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 96, in __iter__
+    self._fetch_all()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 857, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 713, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 786, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: south_migrationhistory
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ s
+-bash: s: command not found
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --initial
+Creating migrations directory at '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+Creating __init__.py in '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+ + Added model website.CategorieTe
+ + Added model website.UnnostroTe
+ + Added model website.AccessoriTe
+ + Added model website.ImmaginiLocale
+ + Added model website.ImmaginiChiSiamo
+ + Added model website.Slider
+Created 0001_initial.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 200, in migrate_app
+    applied_all = check_migration_histories(applied_all, delete_ghosts, ignore_ghosts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 79, in check_migration_histories
+    for h in histories:
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 96, in __iter__
+    self._fetch_all()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 857, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/query.py", line 220, in iterator
+    for row in compiler.results_iter():
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 713, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 786, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: south_migrationhistory
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python ./manage.py syncdb
+Syncing...
+Creating tables ...
+Creating table django_admin_log
+Creating table auth_permission
+Creating table auth_group_permissions
+Creating table auth_group
+Creating table auth_user_groups
+Creating table auth_user_user_permissions
+Creating table auth_user
+Creating table django_content_type
+Creating table django_session
+Creating table south_migrationhistory
+
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no): yes
+Username (leave blank to use 'marta'): 
+Email address: 
+Password: 
+Password (again): 
+Superuser created successfully.
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+ - website
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --initial
+ + Added model website.CategorieTe
+ + Added model website.UnnostroTe
+ + Added model website.AccessoriTe
+ + Added model website.ImmaginiLocale
+ + Added model website.ImmaginiChiSiamo
+ + Added model website.Slider
+Created 0002_initial.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0002_initial.
+ > website:0001_initial
+ > website:0002_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "website_categoriete" ("id" integer NOT NULL PRIMARY KEY, "titolo" varchar(100) NOT NULL)
+The error was: table "website_categoriete" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "website_categoriete"; []
+   = DROP TABLE "website_unnostrote"; []
+   = DROP TABLE "website_accessorite"; []
+   = DROP TABLE "website_immaginilocale"; []
+   = DROP TABLE "website_immaginichisiamo"; []
+   = DROP TABLE "website_slider"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: website:0002_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/camellia/website/migrations/0002_initial.py", line 14, in forwards
+    ('titolo', self.gf('django.db.models.fields.CharField')(max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "website_categoriete" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate myapp --fake
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 81, in handle
+    apps = [Migrations(app)]
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/base.py", line 64, in __call__
+    self.instances[app_label] = super(MigrationsMetaclass, self).__call__(app_label_to_app_module(app_label), **kwds)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/utils.py", line 41, in app_label_to_app_module
+    app = models.get_app(app_label)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/loading.py", line 190, in get_app
+    raise ImproperlyConfigured("App with label %s could not be found" % app_label)
+django.core.exceptions.ImproperlyConfigured: App with label myapp could not be found
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website --fake
+Running migrations for website:
+ - Migrating forwards to 0002_initial.
+ > website:0002_initial
+   (faked)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ rm db.sqlite3 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python ./manage.py syncdb
+Syncing...
+Creating tables ...
+Creating table django_admin_log
+Creating table auth_permission
+Creating table auth_group_permissions
+Creating table auth_group
+Creating table auth_user_groups
+Creating table auth_user_user_permissions
+Creating table auth_user
+Creating table django_content_type
+Creating table django_session
+Creating table website_categoriete
+Creating table website_unnostrote
+Creating table website_accessorite
+Creating table website_immaginilocale
+Creating table website_immaginichisiamo
+Creating table website_slider
+Creating table south_migrationhistory
+
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no): ^CTraceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 415, in handle
+    return self.handle_noargs(**options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/syncdb.py", line 92, in handle_noargs
+    syncdb.Command().execute(**options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 415, in handle
+    return self.handle_noargs(**options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/commands/syncdb.py", line 112, in handle_noargs
+    emit_post_sync_signal(created_models, verbosity, interactive, db)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/sql.py", line 216, in emit_post_sync_signal
+    interactive=interactive, db=db)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 185, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/contrib/auth/management/__init__.py", line 120, in create_superuser
+    confirm = input(msg)
+KeyboardInterrupt
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ rm db.sqlite3 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python ./manage.py syncdb
+Creating tables ...
+Creating table django_admin_log
+Creating table auth_permission
+Creating table auth_group_permissions
+Creating table auth_group
+Creating table auth_user_groups
+Creating table auth_user_user_permissions
+Creating table auth_user
+Creating table django_content_type
+Creating table django_session
+Creating table taggit_tag
+Creating table taggit_taggeditem
+Creating table easy_thumbnails_source
+Creating table easy_thumbnails_thumbnail
+Creating table easy_thumbnails_thumbnaildimensions
+Creating table website_categoriete
+Creating table website_unnostrote
+Creating table website_accessorite
+Creating table website_immaginilocale
+Creating table website_immaginichisiamo
+Creating table website_slider
+
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no): ^CTraceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 415, in handle
+    return self.handle_noargs(**options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/commands/syncdb.py", line 112, in handle_noargs
+    emit_post_sync_signal(created_models, verbosity, interactive, db)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/sql.py", line 216, in emit_post_sync_signal
+    interactive=interactive, db=db)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 185, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/contrib/auth/management/__init__.py", line 120, in create_superuser
+    confirm = input(msg)
+KeyboardInterrupt
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python ./manage.py syncdb
+Syncing...
+Creating tables ...
+Creating table south_migrationhistory
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > website
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --initial
+Creating migrations directory at '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+Creating __init__.py in '/Users/marta/work/webDev/virtualFold/camellia/website/migrations'...
+ + Added model website.CategorieTe
+ + Added model website.UnnostroTe
+ + Added model website.AccessoriTe
+ + Added model website.ImmaginiLocale
+ + Added model website.ImmaginiChiSiamo
+ + Added model website.Slider
+Created 0001_initial.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0001_initial.
+ > website:0001_initial
+FATAL ERROR - The following SQL query failed: CREATE TABLE "website_categoriete" ("id" integer NOT NULL PRIMARY KEY, "titolo" varchar(100) NOT NULL)
+The error was: table "website_categoriete" already exists
+ ! Error found during real run of migration! Aborting.
+
+ ! Since you have a database that does not support running
+ ! schema-altering statements in transactions, we have had 
+ ! to leave it in an interim state between migrations.
+
+! You *might* be able to recover with:   = DROP TABLE "website_categoriete"; []
+   = DROP TABLE "website_unnostrote"; []
+   = DROP TABLE "website_accessorite"; []
+   = DROP TABLE "website_immaginilocale"; []
+   = DROP TABLE "website_immaginichisiamo"; []
+   = DROP TABLE "website_slider"; []
+
+ ! The South developers regret this has happened, and would
+ ! like to gently persuade you to consider a slightly
+ ! easier-to-deal-with DBMS (one that supports DDL transactions)
+ ! NOTE: The error which caused the migration to fail is further up.
+Error in migration: website:0001_initial
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 111, in handle
+    ignore_ghosts = ignore_ghosts,
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/__init__.py", line 220, in migrate_app
+    success = migrator.migrate_many(target, workplan, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 256, in migrate_many
+    result = migrator.__class__.migrate_many(migrator, target, migrations, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 331, in migrate_many
+    result = self.migrate(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 133, in migrate
+    result = self.run(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 114, in run
+    return self.run_migration(migration, database)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 84, in run_migration
+    migration_function()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/migrators.py", line 60, in <lambda>
+    return (lambda: direction(orm))
+  File "/Users/marta/work/webDev/virtualFold/camellia/website/migrations/0001_initial.py", line 14, in forwards
+    ('titolo', self.gf('django.db.models.fields.CharField')(max_length=100)),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 47, in _cache_clear
+    return func(self, table, *args, **opts)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 361, in create_table
+    "columns": ', '.join([col for col in columns if col]),
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/db/generic.py", line 282, in execute
+    cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 69, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/utils.py", line 99, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/util.py", line 53, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/backends/sqlite3/base.py", line 451, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table "website_categoriete" already exists
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate myapp --fake
+Traceback (most recent call last):
+  File "./manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 399, in execute_from_command_line
+    utility.execute()
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/__init__.py", line 392, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 242, in run_from_argv
+    self.execute(*args, **options.__dict__)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/core/management/base.py", line 285, in execute
+    output = self.handle(*args, **options)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/management/commands/migrate.py", line 81, in handle
+    apps = [Migrations(app)]
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/base.py", line 64, in __call__
+    self.instances[app_label] = super(MigrationsMetaclass, self).__call__(app_label_to_app_module(app_label), **kwds)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/south/migration/utils.py", line 41, in app_label_to_app_module
+    app = models.get_app(app_label)
+  File "/Users/marta/work/webDev/virtualFold/lib/python2.7/site-packages/django/db/models/loading.py", line 190, in get_app
+    raise ImproperlyConfigured("App with label %s could not be found" % app_label)
+django.core.exceptions.ImproperlyConfigured: App with label myapp could not be found
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website --fake
+Running migrations for website:
+ - Migrating forwards to 0001_initial.
+ > website:0001_initial
+   (faked)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ rm db.sqlite3 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ python ./manage.py syncdb
+Creating tables ...
+Creating table django_admin_log
+Creating table auth_permission
+Creating table auth_group_permissions
+Creating table auth_group
+Creating table auth_user_groups
+Creating table auth_user_user_permissions
+Creating table auth_user
+Creating table django_content_type
+Creating table django_session
+Creating table taggit_tag
+Creating table taggit_taggeditem
+Creating table easy_thumbnails_source
+Creating table easy_thumbnails_thumbnail
+Creating table easy_thumbnails_thumbnaildimensions
+Creating table website_categoriete
+Creating table website_unnostrote
+Creating table website_accessorite
+Creating table website_immaginilocale
+Creating table website_immaginichisiamo
+Creating table website_slider
+
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no): yes
+Username (leave blank to use 'marta'): 
+Email address: 
+Password: 
+Password (again): 
+Superuser created successfully.
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ 
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py syncdb
+Syncing...
+Creating tables ...
+Creating table south_migrationhistory
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+ - website
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py convert_to_south website
+This application is already managed by South.
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py syncdb
+Syncing...
+Creating tables ...
+Installing custom SQL ...
+Installing indexes ...
+Installed 0 object(s) from 0 fixture(s)
+
+Synced:
+ > django.contrib.admin
+ > django.contrib.auth
+ > django.contrib.contenttypes
+ > django.contrib.sessions
+ > django.contrib.messages
+ > django.contrib.staticfiles
+ > south
+
+Not synced (use migrations):
+ - taggit
+ - easy_thumbnails
+ - website
+(use ./manage.py migrate to migrate these)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate --fake
+Running migrations for taggit:
+ - Migrating forwards to 0002_unique_tagnames.
+ > taggit:0001_initial
+   (faked)
+ > taggit:0002_unique_tagnames
+   (faked)
+Running migrations for easy_thumbnails:
+ - Migrating forwards to 0016_auto__add_thumbnaildimensions.
+ > easy_thumbnails:0001_initial
+   (faked)
+ > easy_thumbnails:0002_filename_indexes
+   (faked)
+ > easy_thumbnails:0003_auto__add_storagenew
+   (faked)
+ > easy_thumbnails:0004_auto__add_field_source_storage_new__add_field_thumbnail_storage_new
+   (faked)
+ > easy_thumbnails:0005_storage_fks_null
+   (faked)
+ > easy_thumbnails:0006_copy_storage
+   (faked)
+ > easy_thumbnails:0007_storagenew_fks_not_null
+   (faked)
+ > easy_thumbnails:0008_auto__del_field_source_storage__del_field_thumbnail_storage
+   (faked)
+ > easy_thumbnails:0009_auto__del_storage
+   (faked)
+ > easy_thumbnails:0010_rename_storage
+   (faked)
+ > easy_thumbnails:0011_auto__add_field_source_storage_hash__add_field_thumbnail_storage_hash
+   (faked)
+ > easy_thumbnails:0012_build_storage_hashes
+   (faked)
+ > easy_thumbnails:0013_auto__del_storage__del_field_source_storage__del_field_thumbnail_stora
+   (faked)
+ > easy_thumbnails:0014_auto__add_unique_source_name_storage_hash__add_unique_thumbnail_name_s
+   (faked)
+ > easy_thumbnails:0015_auto__del_unique_thumbnail_name_storage_hash__add_unique_thumbnail_sou
+   (faked)
+ > easy_thumbnails:0016_auto__add_thumbnaildimensions
+   (faked)
+Running migrations for website:
+ - Migrating forwards to 0001_initial.
+ > website:0001_initial
+   (faked)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --auto
+ + Added field prezzo_hg on website.UnnostroTe
+Created 0002_auto__add_field_unnostrote_prezzo_hg.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0002_auto__add_field_unnostrote_prezzo_hg.
+ > website:0002_auto__add_field_unnostrote_prezzo_hg
+ - Loading initial data for website.
+Installed 0 object(s) from 0 fixture(s)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py schemamigration website --auto
+ - Deleted field croppingfree on website.UnnostroTe
+Created 0003_auto__del_field_unnostrote_croppingfree.py. You can now apply this migration with: ./manage.py migrate website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ./manage.py migrate website
+Running migrations for website:
+ - Migrating forwards to 0003_auto__del_field_unnostrote_croppingfree.
+ > website:0003_auto__del_field_unnostrote_croppingfree
+ - Loading initial data for website.
+Installed 0 object(s) from 0 fixture(s)
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls
+camellia	db.sqlite3	manage.py	media		static		website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ git init
+Initialized empty Git repository in /Users/marta/work/webDev/virtualFold/camellia/.git/
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ ls -la
+total 176
+drwxr-xr-x  10 marta  staff    340 May 18 16:01 .
+drwxr-xr-x  11 marta  staff    374 May 18 10:30 ..
+-rw-r--r--@  1 marta  staff   6148 May 18 11:00 .DS_Store
+drwxr-xr-x   9 marta  staff    306 May 18 16:01 .git
+drwxr-xr-x  10 marta  staff    340 May 18 11:46 camellia
+-rw-r--r--   1 marta  staff  77824 May 18 15:14 db.sqlite3
+-rwxr-xr-x   1 marta  staff    251 May  5 11:35 manage.py
+drwxr-xr-x   4 marta  staff    136 May 12 13:22 media
+drwxr-xr-x  10 marta  staff    340 May  5 17:00 static
+drwxr-xr-x  16 marta  staff    544 May 18 15:22 website
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ emacs .gitignore
+(virtualFold)Martinas-MacBook-Pro:camellia marta$ less .gitignore
+
+# first line must not contain any rules
+*.sqlite3
+media/*
+!.gitignore
+(END) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

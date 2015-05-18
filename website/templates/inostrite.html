@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container inostritecontainer"  style="background-color: #f5f4eb;">
+	<div class="col-xs-12">
+		<h3 class="inostritetitolo">I NOSTRI TE'</h3>
+	</div>
+	{% for cat in categorie_te %}
+	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		{% for unte in cat.unnostrote_set.all|slice:':1' %}
+				{% load cropping %}
+				<img src="{% cropped_thumbnail unte "cropping" %}" class="img-responsive inostriteimg" alt="{{cat.titolo}}" title="{{cat.titolo}}" />
+		{% endfor %}
+		<h4 class="inostritetitoloimg">
+				{{cat.titolo}} 
+
+		</h4>
+	</div>
+
+
+	{% endfor %}<!-- end for cat in categoria_list -->
+
+</div><!-- container -->
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% block menu %}
+{% load staticfiles %}
+
+
+<nav class="navbar navbar-default">
+		<div class="col-xs-12 top">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+				<a href="{% url 'home' %}">
+			    <img src="{% static 'img/camellia_logo.png' %}" class="img-responsive">
+			  </a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+				<p class="textsocial">
+					<a href="https://www.facebook.com/" target="_Blank"><i class="fa fa-facebook fa-2x"></i></a>
+					<a href="https://twitter.com/" target="_Blank"><i class="fa fa-twitter fa-2x"></i></a>
+					<a href="https://instagram.com/" target="_Blank"><i class="fa fa-instagram fa-2x"></i></a>
+				</p>
+			</div>
+		</div><!-- container -->
+	</div><!-- col xs 12 -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	    		<li><a href="{% url 'home' %}">HOME</a></li>
+	    		<li><a href="{% url 'chisiamo' %}">CHI SIAMO</a></li>
+	    		<li><a href="{% url 'ilte' %}"> IL TE'</a></li>
+	    		<li><a href="{% url 'inostrite' %}">I NOSTRI TE'</a></li>
+	    		<li><a href="{% url 'ritodelte' %}">IL RITO DEL TE'</a></li>      	
+	    		<li><a href="{% url 'dovesiamo' %}">DOVE SIAMO</a></li>
+	    		<li><a href="{% url 'contact' %}">CONTATTI</a></li>
+      </ul>
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+{% endblock %}
